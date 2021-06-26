@@ -1,0 +1,6 @@
+.create_todo{
+    margin-bottom: 30px;
+}
+.zero_todo_btn:hover{
+    cursor: wait !important;
+}
