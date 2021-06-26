@@ -35,7 +35,8 @@ export class CreateTodo extends Component {
             this.props.dispatch(createTodo({
                 id: this.props.todos.length,
                 title,
-                text
+                text,
+                done: false
             }))
             this.clearData()
         }else{

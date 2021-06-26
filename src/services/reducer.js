@@ -20,7 +20,7 @@ function reducer(state = initialState, action){
     switch(action.type){
         case CREATE_TODO: return {
             ...state,
-            todo: [...state.todo, action.payload],
+            todo: [action.payload, ...state.todo],
             changes: !state.changes
         }
         case UPDATE_TODO: 

@@ -12,7 +12,8 @@ export class Card extends Component {
             updateTodo({
                 id: this.props.todo.id,
                 text: value,
-                title: this.props.todo.title
+                title: this.props.todo.title,
+                done: this.props.todo.done
             })
         )
 
