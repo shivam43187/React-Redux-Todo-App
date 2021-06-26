@@ -1,4 +1,4 @@
-import { CREATE_TODO, REMOVE_ALL, REMOVE_TODO, UPDATE_TODO } from "./action";
+import { CREATE_TODO, MARK_DONE, REMOVE_ALL, REMOVE_TODO, UPDATE_TODO } from "./action";
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -9,7 +9,8 @@ const initialState = {
         {
             id: 0,
             title: "My App",
-            text: "This is a todo app"
+            text: "This is a todo app",
+            done: false
         }
     ],
     changes: false
@@ -48,6 +49,17 @@ function reducer(state = initialState, action){
             return {
                 ...state,
                 todo: [],
+                changes: !state.changes
+            }
+        case MARK_DONE: 
+            let markTodo = state.todo
+            const markIndex = state.todo.findIndex((item) => item.id === action.payload)
+            if(markIndex !== -1){
+                markTodo[markIndex].done = !markTodo[markIndex].done
+            }
+            return {
+                ...state,
+                todo: markTodo,
                 changes: !state.changes
             }
         default: return state

@@ -2,6 +2,7 @@ export const CREATE_TODO = 'CREATE_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
 export const REMOVE_ALL = 'REMOVE_ALL';
+export const MARK_DONE = 'MARK_DONE';
 
 export const createTodo = (data) => {
     return {
@@ -27,5 +28,12 @@ export const removeTodo = (id) => {
 export const removeAll = () => {
     return {
         type: REMOVE_ALL,
+    }
+}
+
+export const markDone = (id) => {
+    return {
+        type: MARK_DONE,
+        payload: id,
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { removeTodo, updateTodo } from '../services/action'
+import { markDone, removeTodo, updateTodo } from '../services/action'
 import "../styles/card.css"
 
 export class Card extends Component {
@@ -22,6 +22,10 @@ export class Card extends Component {
         this.props.dispatch(removeTodo(this.props.todo.id))
     }
 
+    handleDone = () => {
+        this.props.dispatch(markDone(this.props.todo.id))
+    }
+
     render() {
         console.log(this.props)
         return (
@@ -35,6 +39,11 @@ export class Card extends Component {
                     <textarea value={this.props.todo.text} onChange={(e) => this.handleChange(e)} />
                 </div>
                 <div className="card_footer">
+                    <button 
+                    className={`btn btn-sm ${this.props.todo.done ? "btn-info" : "btn-outline-info"}`}
+                    onClick={this.handleDone}>
+                        { this.props.todo.done ? "Done" : "Mark as Done"}
+                    </button>
                     <span className="card_titleIcon" onClick={this.removeTodo}>
                         <i className="fa fa-trash-o" aria-hidden="true"></i>
                     </span>
@@ -44,4 +53,10 @@ export class Card extends Component {
     }
 }
 
-export default connect()(Card)
+const mapSateToProps = (state) => {
+    return {
+        changes: state.changes
+    }
+}
+
+export default connect(mapSateToProps)(Card)
